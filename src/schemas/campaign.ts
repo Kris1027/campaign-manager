@@ -19,11 +19,11 @@ const baseCampaignSchema = z.object({
     .positive('Must be greater than 0'),
 });
 
-export function createCampaignSchema(emeraldBalance: number) {
+export function createCampaignSchema(availableBalance: number) {
   return baseCampaignSchema.refine(
-    (data) => data.campaignFund <= emeraldBalance,
+    (data) => data.campaignFund <= availableBalance,
     {
-      message: `Exceeds available balance (${emeraldBalance})`,
+      message: `Exceeds available balance (${availableBalance})`,
       path: ['campaignFund'],
     }
   );

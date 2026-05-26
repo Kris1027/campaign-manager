@@ -10,30 +10,41 @@ import styles from './campaign-form.module.css';
 
 interface CampaignFormProps {
   emeraldBalance: number;
+  campaign?: Campaign;
   onSubmit: (campaign: Campaign) => void;
   onCancel: () => void;
 }
 
 function CampaignForm({
   emeraldBalance,
+  campaign,
   onSubmit,
   onCancel,
 }: CampaignFormProps) {
+  const availableBalance = emeraldBalance + (campaign?.campaignFund ?? 0);
+
   const {
     register,
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<CampaignFormData>({
-    resolver: zodResolver(createCampaignSchema(emeraldBalance)),
-    defaultValues: {
-      status: 'on',
-      keywords: [],
-    },
+    resolver: zodResolver(createCampaignSchema(availableBalance)),
+    defaultValues: campaign
+      ? {
+          name: campaign.name,
+          keywords: campaign.keywords,
+          bidAmount: campaign.bidAmount,
+          campaignFund: campaign.campaignFund,
+          status: campaign.status,
+          town: campaign.town,
+          radius: campaign.radius,
+        }
+      : { status: 'on', keywords: [] },
   });
 
   function handleValidSubmit(data: CampaignFormData) {
-    onSubmit({ ...data, id: crypto.randomUUID() });
+    onSubmit({ ...data, id: campaign?.id ?? crypto.randomUUID() });
   }
 
   return (
@@ -89,7 +100,10 @@ function CampaignForm({
         <div className={styles.field}>
           <label htmlFor='campaignFund'>
             Campaign fund
-            <span className={styles.hint}> (balance: {emeraldBalance})</span>
+            <span className={styles.hint}>
+              {' '}
+              (available: {availableBalance})
+            </span>
           </label>
           <input
             id='campaignFund'
@@ -154,7 +168,9 @@ function CampaignForm({
         <button type='button' onClick={onCancel}>
           Cancel
         </button>
-        <button type='submit'>Create campaign</button>
+        <button type='submit'>
+          {campaign ? 'Save changes' : 'Create campaign'}
+        </button>
       </div>
     </form>
   );

@@ -3,9 +3,10 @@ import styles from './campaign-item.module.css';
 
 interface CampaignItemProps {
   campaign: Campaign;
+  onEdit: (campaign: Campaign) => void;
 }
 
-function CampaignItem({ campaign }: CampaignItemProps) {
+function CampaignItem({ campaign, onEdit }: CampaignItemProps) {
   const { name, keywords, bidAmount, campaignFund, status, town, radius } =
     campaign;
 
@@ -43,7 +44,7 @@ function CampaignItem({ campaign }: CampaignItemProps) {
         </div>
       </div>
       <div className={styles.actions}>
-        <button>Edit</button>
+        <button onClick={() => onEdit(campaign)}>Edit</button>
         <button>Remove</button>
       </div>
     </div>

@@ -10,7 +10,7 @@ function Header({ emeraldBalance, onNewCampaign }: HeaderProps) {
     <header className={styles.header}>
       <div className={styles.inner}>
         <h1>Campaign Manager</h1>
-        <span>Emerald Balance: {emeraldBalance}</span>
+        <span>Emerald Balance: ${emeraldBalance}</span>
         <button onClick={onNewCampaign}>New campaign</button>
       </div>
     </header>
