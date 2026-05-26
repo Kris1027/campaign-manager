@@ -1,3 +1,4 @@
+import { FiDollarSign, FiEdit2, FiTrash2 } from 'react-icons/fi';
 import type { Campaign } from '../../types';
 import Button from '../ui/button';
 import styles from './campaign-item.module.css';
@@ -22,11 +23,17 @@ function CampaignItem({ campaign, onEdit, onRemove }: CampaignItemProps) {
         </div>
         <div className={styles.field}>
           <span className={styles.label}>Bid Amount</span>
-          <span className={styles.value}>${bidAmount.toFixed(2)}</span>
+          <span className={styles.value}>
+            <FiDollarSign aria-hidden='true' />
+            {bidAmount.toFixed(2)}
+          </span>
         </div>
         <div className={styles.field}>
           <span className={styles.label}>Campaign Fund</span>
-          <span className={styles.value}>${campaignFund.toFixed(2)}</span>
+          <span className={styles.value}>
+            <FiDollarSign aria-hidden='true' />
+            {campaignFund.toFixed(2)}
+          </span>
         </div>
         <div className={styles.field}>
           <span className={styles.label}>Status</span>
@@ -47,7 +54,7 @@ function CampaignItem({ campaign, onEdit, onRemove }: CampaignItemProps) {
       </div>
       <div className={styles.actions}>
         <Button variant='secondary' onClick={() => onEdit(campaign)}>
-          Edit
+          <FiEdit2 aria-hidden='true' /> Edit
         </Button>
         <Button
           variant='danger'
@@ -55,7 +62,7 @@ function CampaignItem({ campaign, onEdit, onRemove }: CampaignItemProps) {
             if (window.confirm(`Remove "${name}"?`)) onRemove(campaign.id);
           }}
         >
-          Remove
+          <FiTrash2 aria-hidden='true' /> Remove
         </Button>
       </div>
     </div>

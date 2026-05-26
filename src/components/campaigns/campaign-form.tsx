@@ -6,7 +6,9 @@ import {
 } from '../../schemas/campaign';
 import { towns, keywordSuggestions } from '../../data/mock-data';
 import type { Campaign } from '../../types';
+import { FiCheck, FiDollarSign, FiPlus, FiX } from 'react-icons/fi';
 import Button from '../ui/button';
+import Dropdown from '../ui/dropdown';
 import FormField from '../ui/form-field';
 import styles from './campaign-form.module.css';
 
@@ -61,21 +63,37 @@ function CampaignForm({
 
       <div className={styles.row}>
         <FormField label='Status' htmlFor='status'>
-          <select id='status' {...register('status')}>
-            <option value='on'>On</option>
-            <option value='off'>Off</option>
-          </select>
+          <Controller
+            name='status'
+            control={control}
+            render={({ field }) => (
+              <Dropdown
+                id='status'
+                options={[
+                  { value: 'on', label: 'On' },
+                  { value: 'off', label: 'Off' },
+                ]}
+                value={field.value}
+                onChange={field.onChange}
+              />
+            )}
+          />
         </FormField>
 
         <FormField label='Town' htmlFor='town' error={errors.town?.message}>
-          <select id='town' {...register('town')}>
-            <option value=''>Select town</option>
-            {towns.map((town) => (
-              <option key={town} value={town}>
-                {town}
-              </option>
-            ))}
-          </select>
+          <Controller
+            name='town'
+            control={control}
+            render={({ field }) => (
+              <Dropdown
+                id='town'
+                options={towns.map((t) => ({ value: t, label: t }))}
+                value={field.value}
+                onChange={field.onChange}
+                placeholder='Select town'
+              />
+            )}
+          />
         </FormField>
       </div>
 
@@ -97,7 +115,12 @@ function CampaignForm({
         <FormField
           label='Campaign fund'
           htmlFor='campaignFund'
-          hint={`(available: ${availableBalance})`}
+          hint={
+            <>
+              (available: <FiDollarSign aria-hidden='true' />
+              {availableBalance})
+            </>
+          }
           error={errors.campaignFund?.message}
         >
           <input
@@ -154,10 +177,18 @@ function CampaignForm({
 
       <div className={styles.actions}>
         <Button type='button' variant='secondary' onClick={onCancel}>
-          Cancel
+          <FiX aria-hidden='true' /> Cancel
         </Button>
         <Button type='submit'>
-          {campaign ? 'Save changes' : 'Create campaign'}
+          {campaign ? (
+            <>
+              <FiCheck aria-hidden='true' /> Save changes
+            </>
+          ) : (
+            <>
+              <FiPlus aria-hidden='true' /> Create campaign
+            </>
+          )}
         </Button>
       </div>
     </form>

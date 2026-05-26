@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { FiX } from 'react-icons/fi';
 import styles from './modal.module.css';
 
 interface ModalProps {
@@ -21,7 +22,7 @@ function Modal({ isOpen, onClose, title, children }: ModalProps) {
             onClick={onClose}
             aria-label='Close'
           >
-            ×
+            <FiX aria-hidden='true' />
           </button>
         </div>
         <div className={styles.body}>{children}</div>

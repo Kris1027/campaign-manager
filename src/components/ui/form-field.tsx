@@ -4,7 +4,7 @@ import styles from './form-field.module.css';
 interface FormFieldProps {
   label: string;
   htmlFor?: string;
-  hint?: string;
+  hint?: ReactNode;
   error?: string;
   children: ReactNode;
 }

@@ -23,6 +23,22 @@
   color: var(--color-text-primary);
 }
 
+.heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.balance {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.emeraldIcon {
+  color: #50c878;
+}
+
 @media (min-width: 640px) {
   .inner {
     flex-direction: row;
