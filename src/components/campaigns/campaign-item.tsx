@@ -4,9 +4,10 @@ import styles from './campaign-item.module.css';
 interface CampaignItemProps {
   campaign: Campaign;
   onEdit: (campaign: Campaign) => void;
+  onRemove: (id: string) => void;
 }
 
-function CampaignItem({ campaign, onEdit }: CampaignItemProps) {
+function CampaignItem({ campaign, onEdit, onRemove }: CampaignItemProps) {
   const { name, keywords, bidAmount, campaignFund, status, town, radius } =
     campaign;
 
@@ -45,7 +46,13 @@ function CampaignItem({ campaign, onEdit }: CampaignItemProps) {
       </div>
       <div className={styles.actions}>
         <button onClick={() => onEdit(campaign)}>Edit</button>
-        <button>Remove</button>
+        <button
+          onClick={() => {
+            if (window.confirm(`Remove "${name}"?`)) onRemove(campaign.id);
+          }}
+        >
+          Remove
+        </button>
       </div>
     </div>
   );

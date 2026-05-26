@@ -39,6 +39,15 @@ function App() {
     setModalState(null);
   }
 
+  function handleRemoveCampaign(id: string) {
+    const campaign = seller.campaigns.find((c) => c.id === id);
+    if (!campaign) return;
+    setSeller((prev) => ({
+      campaigns: prev.campaigns.filter((c) => c.id !== id),
+      emeraldBalance: prev.emeraldBalance + campaign.campaignFund,
+    }));
+  }
+
   function handleEditCampaign(updated: Campaign) {
     if (modalState?.mode !== 'edit') return;
     const original = modalState.campaign;
@@ -60,6 +69,7 @@ function App() {
         <CampaignList
           campaigns={seller.campaigns}
           onEdit={(campaign) => setModalState({ mode: 'edit', campaign })}
+          onRemove={handleRemoveCampaign}
         />
       </main>
       <Modal
