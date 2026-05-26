@@ -1,5 +1,5 @@
 import type { Campaign } from '../../types';
-import Button from '../ui/button/button';
+import Button from '../ui/button';
 import styles from './campaign-item.module.css';
 
 interface CampaignItemProps {

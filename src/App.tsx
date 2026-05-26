@@ -3,7 +3,7 @@ import styles from './app.module.css';
 import CampaignList from './components/campaigns/campaign-list';
 import CampaignForm from './components/campaigns/campaign-form';
 import Header from './components/header/header';
-import Modal from './components/modal/modal';
+import Modal from './components/ui/modal';
 import { initialSeller } from './data/mock-data';
 import type { Campaign, Seller } from './types';
 

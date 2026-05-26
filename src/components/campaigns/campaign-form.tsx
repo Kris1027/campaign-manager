@@ -6,7 +6,8 @@ import {
 } from '../../schemas/campaign';
 import { towns, keywordSuggestions } from '../../data/mock-data';
 import type { Campaign } from '../../types';
-import Button from '../ui/button/button';
+import Button from '../ui/button';
+import FormField from '../ui/form-field';
 import styles from './campaign-form.module.css';
 
 interface CampaignFormProps {
@@ -50,25 +51,23 @@ function CampaignForm({
 
   return (
     <form onSubmit={handleSubmit(handleValidSubmit)} className={styles.form}>
-      <div className={styles.field}>
-        <label htmlFor='name'>Campaign name</label>
+      <FormField
+        label='Campaign name'
+        htmlFor='name'
+        error={errors.name?.message}
+      >
         <input id='name' type='text' {...register('name')} />
-        {errors.name && (
-          <span className={styles.error}>{errors.name.message}</span>
-        )}
-      </div>
+      </FormField>
 
       <div className={styles.row}>
-        <div className={styles.field}>
-          <label htmlFor='status'>Status</label>
+        <FormField label='Status' htmlFor='status'>
           <select id='status' {...register('status')}>
             <option value='on'>On</option>
             <option value='off'>Off</option>
           </select>
-        </div>
+        </FormField>
 
-        <div className={styles.field}>
-          <label htmlFor='town'>Town</label>
+        <FormField label='Town' htmlFor='town' error={errors.town?.message}>
           <select id='town' {...register('town')}>
             <option value=''>Select town</option>
             {towns.map((town) => (
@@ -77,15 +76,15 @@ function CampaignForm({
               </option>
             ))}
           </select>
-          {errors.town && (
-            <span className={styles.error}>{errors.town.message}</span>
-          )}
-        </div>
+        </FormField>
       </div>
 
       <div className={styles.row}>
-        <div className={styles.field}>
-          <label htmlFor='bidAmount'>Bid amount</label>
+        <FormField
+          label='Bid amount'
+          htmlFor='bidAmount'
+          error={errors.bidAmount?.message}
+        >
           <input
             id='bidAmount'
             type='number'
@@ -93,19 +92,14 @@ function CampaignForm({
             min='0'
             {...register('bidAmount', { valueAsNumber: true })}
           />
-          {errors.bidAmount && (
-            <span className={styles.error}>{errors.bidAmount.message}</span>
-          )}
-        </div>
+        </FormField>
 
-        <div className={styles.field}>
-          <label htmlFor='campaignFund'>
-            Campaign fund
-            <span className={styles.hint}>
-              {' '}
-              (available: {availableBalance})
-            </span>
-          </label>
+        <FormField
+          label='Campaign fund'
+          htmlFor='campaignFund'
+          hint={`(available: ${availableBalance})`}
+          error={errors.campaignFund?.message}
+        >
           <input
             id='campaignFund'
             type='number'
@@ -113,27 +107,23 @@ function CampaignForm({
             min='0'
             {...register('campaignFund', { valueAsNumber: true })}
           />
-          {errors.campaignFund && (
-            <span className={styles.error}>{errors.campaignFund.message}</span>
-          )}
-        </div>
+        </FormField>
 
-        <div className={styles.field}>
-          <label htmlFor='radius'>Radius (km)</label>
+        <FormField
+          label='Radius (km)'
+          htmlFor='radius'
+          error={errors.radius?.message}
+        >
           <input
             id='radius'
             type='number'
             min='1'
             {...register('radius', { valueAsNumber: true })}
           />
-          {errors.radius && (
-            <span className={styles.error}>{errors.radius.message}</span>
-          )}
-        </div>
+        </FormField>
       </div>
 
-      <div className={styles.field}>
-        <label>Keywords</label>
+      <FormField label='Keywords' error={errors.keywords?.message}>
         <Controller
           name='keywords'
           control={control}
@@ -160,10 +150,7 @@ function CampaignForm({
             </div>
           )}
         />
-        {errors.keywords && (
-          <span className={styles.error}>{errors.keywords.message}</span>
-        )}
-      </div>
+      </FormField>
 
       <div className={styles.actions}>
         <Button type='button' variant='secondary' onClick={onCancel}>
