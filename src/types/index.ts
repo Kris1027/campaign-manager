@@ -5,7 +5,7 @@ export interface Campaign {
   bidAmount: number;
   campaignFund: number;
   status: 'on' | 'off';
-  town: string | null;
+  town: string;
   radius: number;
 }
 

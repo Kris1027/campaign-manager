@@ -72,7 +72,7 @@ export const initialCampaigns: Campaign[] = [
     bidAmount: 0.5,
     campaignFund: 300,
     status: 'off',
-    town: null,
+    town: 'Kielce',
     radius: 10,
   },
 ];
