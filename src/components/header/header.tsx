@@ -1,3 +1,4 @@
+import Button from '../ui/button/button';
 import styles from './header.module.css';
 
 interface HeaderProps {
@@ -11,7 +12,7 @@ function Header({ emeraldBalance, onNewCampaign }: HeaderProps) {
       <div className={styles.inner}>
         <h1>Campaign Manager</h1>
         <span>Emerald Balance: ${emeraldBalance}</span>
-        <button onClick={onNewCampaign}>New campaign</button>
+        <Button onClick={onNewCampaign}>New campaign</Button>
       </div>
     </header>
   );

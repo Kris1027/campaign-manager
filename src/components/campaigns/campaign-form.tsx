@@ -6,6 +6,7 @@ import {
 } from '../../schemas/campaign';
 import { towns, keywordSuggestions } from '../../data/mock-data';
 import type { Campaign } from '../../types';
+import Button from '../ui/button/button';
 import styles from './campaign-form.module.css';
 
 interface CampaignFormProps {
@@ -165,12 +166,12 @@ function CampaignForm({
       </div>
 
       <div className={styles.actions}>
-        <button type='button' onClick={onCancel}>
+        <Button type='button' variant='secondary' onClick={onCancel}>
           Cancel
-        </button>
-        <button type='submit'>
+        </Button>
+        <Button type='submit'>
           {campaign ? 'Save changes' : 'Create campaign'}
-        </button>
+        </Button>
       </div>
     </form>
   );

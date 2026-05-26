@@ -1,4 +1,5 @@
 import type { Campaign } from '../../types';
+import Button from '../ui/button/button';
 import styles from './campaign-item.module.css';
 
 interface CampaignItemProps {
@@ -45,14 +46,17 @@ function CampaignItem({ campaign, onEdit, onRemove }: CampaignItemProps) {
         </div>
       </div>
       <div className={styles.actions}>
-        <button onClick={() => onEdit(campaign)}>Edit</button>
-        <button
+        <Button variant='secondary' onClick={() => onEdit(campaign)}>
+          Edit
+        </Button>
+        <Button
+          variant='danger'
           onClick={() => {
             if (window.confirm(`Remove "${name}"?`)) onRemove(campaign.id);
           }}
         >
           Remove
-        </button>
+        </Button>
       </div>
     </div>
   );

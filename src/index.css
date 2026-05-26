@@ -37,4 +37,7 @@ body {
   --color-status-off-bg: #fee2e2;
   --shadow-card: 0 1px 4px rgba(0, 0, 0, 0.08);
   --radius: 8px;
+  --color-accent-hover: #2f4ac4;
+  --color-danger: #dc2626;
+  --color-danger-hover: #b91c1c;
 }
