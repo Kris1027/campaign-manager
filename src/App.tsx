@@ -43,6 +43,7 @@ function App() {
           campaigns={campaigns}
           onEdit={(campaign) => setModalState({ mode: 'edit', campaign })}
           onRemove={removeCampaign}
+          onNewCampaign={() => setModalState({ mode: 'create' })}
         />
       </main>
       <Modal
