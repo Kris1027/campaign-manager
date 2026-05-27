@@ -6,12 +6,20 @@ interface FormFieldProps {
   htmlFor?: string;
   hint?: ReactNode;
   error?: string;
+  className?: string;
   children: ReactNode;
 }
 
-function FormField({ label, htmlFor, hint, error, children }: FormFieldProps) {
+function FormField({
+  label,
+  htmlFor,
+  hint,
+  error,
+  className,
+  children,
+}: FormFieldProps) {
   return (
-    <div className={styles.field}>
+    <div className={[styles.field, className].filter(Boolean).join(' ')}>
       <label htmlFor={htmlFor}>
         {label}
         {hint && <span className={styles.hint}> {hint}</span>}

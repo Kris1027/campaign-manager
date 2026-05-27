@@ -1,16 +1,11 @@
 .form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 12px;
 }
 
-.row {
-  display: flex;
-  gap: 12px;
-}
-
-.row > * {
-  flex: 1;
+.fullWidth {
+  grid-column: span 2;
 }
 
 .keywords {

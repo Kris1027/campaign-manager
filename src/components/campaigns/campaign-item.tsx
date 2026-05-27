@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { FiDollarSign, FiEdit2, FiTrash2 } from 'react-icons/fi';
 import type { Campaign } from '../../types';
 import Button from '../ui/button';
+import ConfirmDialog from '../ui/confirm-dialog';
 import styles from './campaign-item.module.css';
 
 interface CampaignItemProps {
@@ -10,6 +12,7 @@ interface CampaignItemProps {
 }
 
 function CampaignItem({ campaign, onEdit, onRemove }: CampaignItemProps) {
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const { name, keywords, bidAmount, campaignFund, status, town, radius } =
     campaign;
 
@@ -56,15 +59,20 @@ function CampaignItem({ campaign, onEdit, onRemove }: CampaignItemProps) {
         <Button variant='secondary' onClick={() => onEdit(campaign)}>
           <FiEdit2 aria-hidden='true' /> Edit
         </Button>
-        <Button
-          variant='danger'
-          onClick={() => {
-            if (window.confirm(`Remove "${name}"?`)) onRemove(campaign.id);
-          }}
-        >
+        <Button variant='danger' onClick={() => setIsConfirmOpen(true)}>
           <FiTrash2 aria-hidden='true' /> Remove
         </Button>
       </div>
+      <ConfirmDialog
+        isOpen={isConfirmOpen}
+        title='Remove campaign'
+        message={`Are you sure you want to remove "${name}"? This action cannot be undone.`}
+        onConfirm={() => {
+          onRemove(campaign.id);
+          setIsConfirmOpen(false);
+        }}
+        onCancel={() => setIsConfirmOpen(false)}
+      />
     </div>
   );
 }

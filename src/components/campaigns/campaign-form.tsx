@@ -57,96 +57,97 @@ function CampaignForm({
         label='Campaign name'
         htmlFor='name'
         error={errors.name?.message}
+        className={styles.fullWidth}
       >
         <input id='name' type='text' {...register('name')} />
       </FormField>
 
-      <div className={styles.row}>
-        <FormField label='Status' htmlFor='status'>
-          <Controller
-            name='status'
-            control={control}
-            render={({ field }) => (
-              <Dropdown
-                id='status'
-                options={[
-                  { value: 'on', label: 'On' },
-                  { value: 'off', label: 'Off' },
-                ]}
-                value={field.value}
-                onChange={field.onChange}
-              />
-            )}
-          />
-        </FormField>
+      <FormField label='Status' htmlFor='status'>
+        <Controller
+          name='status'
+          control={control}
+          render={({ field }) => (
+            <Dropdown
+              id='status'
+              options={[
+                { value: 'on', label: 'On' },
+                { value: 'off', label: 'Off' },
+              ]}
+              value={field.value}
+              onChange={field.onChange}
+            />
+          )}
+        />
+      </FormField>
 
-        <FormField label='Town' htmlFor='town' error={errors.town?.message}>
-          <Controller
-            name='town'
-            control={control}
-            render={({ field }) => (
-              <Dropdown
-                id='town'
-                options={towns.map((t) => ({ value: t, label: t }))}
-                value={field.value}
-                onChange={field.onChange}
-                placeholder='Select town'
-              />
-            )}
-          />
-        </FormField>
-      </div>
+      <FormField label='Town' htmlFor='town' error={errors.town?.message}>
+        <Controller
+          name='town'
+          control={control}
+          render={({ field }) => (
+            <Dropdown
+              id='town'
+              options={towns.map((t) => ({ value: t, label: t }))}
+              value={field.value}
+              onChange={field.onChange}
+              placeholder='Select town'
+            />
+          )}
+        />
+      </FormField>
 
-      <div className={styles.row}>
-        <FormField
-          label='Bid amount'
-          htmlFor='bidAmount'
-          error={errors.bidAmount?.message}
-        >
-          <input
-            id='bidAmount'
-            type='number'
-            step='0.01'
-            min='0'
-            {...register('bidAmount', { valueAsNumber: true })}
-          />
-        </FormField>
+      <FormField
+        label='Bid amount'
+        htmlFor='bidAmount'
+        error={errors.bidAmount?.message}
+      >
+        <input
+          id='bidAmount'
+          type='number'
+          step='0.01'
+          min='0'
+          {...register('bidAmount', { valueAsNumber: true })}
+        />
+      </FormField>
 
-        <FormField
-          label='Campaign fund'
-          htmlFor='campaignFund'
-          hint={
-            <>
-              (available: <FiDollarSign aria-hidden='true' />
-              {availableBalance})
-            </>
-          }
-          error={errors.campaignFund?.message}
-        >
-          <input
-            id='campaignFund'
-            type='number'
-            step='0.01'
-            min='0'
-            {...register('campaignFund', { valueAsNumber: true })}
-          />
-        </FormField>
+      <FormField
+        label='Campaign fund'
+        htmlFor='campaignFund'
+        hint={
+          <>
+            (available: <FiDollarSign aria-hidden='true' />
+            {availableBalance})
+          </>
+        }
+        error={errors.campaignFund?.message}
+      >
+        <input
+          id='campaignFund'
+          type='number'
+          step='0.01'
+          min='0'
+          {...register('campaignFund', { valueAsNumber: true })}
+        />
+      </FormField>
 
-        <FormField
-          label='Radius (km)'
-          htmlFor='radius'
-          error={errors.radius?.message}
-        >
-          <input
-            id='radius'
-            type='number'
-            min='1'
-            {...register('radius', { valueAsNumber: true })}
-          />
-        </FormField>
-      </div>
+      <FormField
+        label='Radius (km)'
+        htmlFor='radius'
+        error={errors.radius?.message}
+      >
+        <input
+          id='radius'
+          type='number'
+          min='1'
+          {...register('radius', { valueAsNumber: true })}
+        />
+      </FormField>
 
-      <FormField label='Keywords' error={errors.keywords?.message}>
+      <FormField
+        label='Keywords'
+        error={errors.keywords?.message}
+        className={styles.fullWidth}
+      >
         <Controller
           name='keywords'
           control={control}
@@ -175,7 +176,7 @@ function CampaignForm({
         />
       </FormField>
 
-      <div className={styles.actions}>
+      <div className={`${styles.actions} ${styles.fullWidth}`}>
         <Button type='button' variant='secondary' onClick={onCancel}>
           <FiX aria-hidden='true' /> Cancel
         </Button>
