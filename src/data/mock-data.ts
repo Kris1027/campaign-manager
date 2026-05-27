@@ -1,6 +1,6 @@
 import type { Campaign, Seller } from '../types';
 
-export const towns: string[] = [
+export const towns = [
   'Warszawa',
   'Kraków',
   'Łódź',
@@ -19,9 +19,9 @@ export const towns: string[] = [
   'Opole',
   'Zielona Góra',
   'Gorzów Wielkopolski',
-];
+] as const;
 
-export const keywordSuggestions: string[] = [
+export const keywordSuggestions = [
   'shoes',
   'electronics',
   'clothing',
@@ -42,7 +42,7 @@ export const keywordSuggestions: string[] = [
   'gaming',
   'music',
   'art',
-];
+] as const;
 
 export const initialCampaigns: Campaign[] = [
   {
