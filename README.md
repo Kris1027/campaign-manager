@@ -1,73 +1,65 @@
-# React + TypeScript + Vite
+# Campaign Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React app for managing advertising campaigns. Sellers can create, remove, update and read campaigns, with an emerald balance that adjusts automatically as campaign funds are allocated or returned.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Create, remove, update and read campaigns
+- Emerald balance updates in real time as funds are allocated
+- Keyword typeahead with chip selection and backspace removal
+- Form validation with Zod
+- State persisted to `localStorage`
+- WCAG 2.1 AA accessibility
 
-## React Compiler
+## Tech stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19.2
+- react-error-boundary 6
+- react-hook-form 7
+- react-icons 5
+- zod 4
+- @hookform/resolvers 5
+- CSS Modules
+- TypeScript 6
+- Vite 8
+- Vitest 4
+- @testing-library/react 16
+- jsdom 29
+- ESLint 10
+- typescript-eslint 8
+- Prettier 3
+- Husky 9
+- lint-staged 17
 
-## Expanding the ESLint configuration
+## Getting started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+```bash
+pnpm install
+pnpm dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Scripts
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+| Command          | Description                         |
+| ---------------- | ----------------------------------- |
+| `pnpm dev`       | Start dev server                    |
+| `pnpm build`     | Type-check and build for production |
+| `pnpm test`      | Run tests in watch mode             |
+| `pnpm typecheck` | Run TypeScript type checking        |
+| `pnpm lint`      | Run ESLint                          |
+| `pnpm format`    | Run Prettier                        |
+| `pnpm validate`  | Run all checks + build              |
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+## Project structure
+
+```
+src/
+  components/
+    campaigns/    # domain components for campaign list, item, and form
+    layout/       # app shell and header
+    ui/           # reusable, domain-agnostic UI primitives
+  data/           # mock seed data
+  hooks/          # state management and localStorage persistence
+  schemas/        # Zod validation schemas
+  types/          # shared TypeScript interfaces
 ```

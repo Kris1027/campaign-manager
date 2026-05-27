@@ -18,7 +18,7 @@ function Header({ emeraldBalance, onNewCampaign }: HeaderProps) {
         <span className={styles.balance} aria-live='polite' aria-atomic='true'>
           <FaGem aria-hidden='true' className={styles.emeraldIcon} /> Emerald
           Balance: <FiDollarSign aria-hidden='true' />
-          {emeraldBalance}
+          {emeraldBalance.toFixed(2)}
         </span>
         <Button onClick={onNewCampaign}>
           <FiPlus aria-hidden='true' /> New campaign

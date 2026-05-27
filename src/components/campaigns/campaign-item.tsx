@@ -22,7 +22,13 @@ function CampaignItem({ campaign, onEdit, onRemove }: CampaignItemProps) {
       <div className={styles.fields}>
         <div className={styles.field}>
           <span className={styles.label}>Keywords</span>
-          <span className={styles.value}>{keywords.join(', ')}</span>
+          <div className={styles.chips}>
+            {keywords.map((k) => (
+              <span key={k} className={styles.chip}>
+                {k}
+              </span>
+            ))}
+          </div>
         </div>
         <div className={styles.field}>
           <span className={styles.label}>Bid Amount</span>

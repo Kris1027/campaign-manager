@@ -8,30 +8,6 @@
   grid-column: span 2;
 }
 
-.keywords {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  padding: 10px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-}
-
-.keywordOption {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 0.875rem;
-  color: var(--color-text-primary);
-  cursor: pointer;
-  padding: 2px 6px;
-  border-radius: 4px;
-}
-
-.keywordOption:hover {
-  background: var(--color-bg);
-}
-
 .actions {
   display: flex;
   justify-content: flex-end;

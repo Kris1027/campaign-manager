@@ -51,16 +51,20 @@ function App() {
         onClose={() => setModalState(null)}
         title={modalState?.mode === 'edit' ? 'Edit campaign' : 'New campaign'}
       >
-        <CampaignForm
-          emeraldBalance={emeraldBalance}
-          campaign={
-            modalState?.mode === 'edit' ? modalState.campaign : undefined
-          }
-          onSubmit={
-            modalState?.mode === 'edit' ? handleEditCampaign : handleAddCampaign
-          }
-          onCancel={() => setModalState(null)}
-        />
+        {modalState !== null && (
+          <CampaignForm
+            emeraldBalance={emeraldBalance}
+            campaign={
+              modalState.mode === 'edit' ? modalState.campaign : undefined
+            }
+            onSubmit={
+              modalState.mode === 'edit'
+                ? handleEditCampaign
+                : handleAddCampaign
+            }
+            onCancel={() => setModalState(null)}
+          />
+        )}
       </Modal>
     </>
   );

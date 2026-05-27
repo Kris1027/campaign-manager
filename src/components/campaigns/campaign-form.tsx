@@ -10,6 +10,7 @@ import { FiCheck, FiDollarSign, FiPlus, FiX } from 'react-icons/fi';
 import Button from '../ui/button';
 import Dropdown from '../ui/dropdown';
 import FormField from '../ui/form-field';
+import KeywordTypeahead from '../ui/keyword-typeahead';
 import styles from './campaign-form.module.css';
 
 interface CampaignFormProps {
@@ -107,13 +108,14 @@ function CampaignForm({
       <FormField
         label='Bid amount'
         htmlFor='bidAmount'
+        hint='(min $0.01)'
         error={errors.bidAmount?.message}
       >
         <input
           id='bidAmount'
           type='number'
           step='0.01'
-          min='0'
+          min='0.01'
           aria-invalid={!!errors.bidAmount}
           aria-describedby={errors.bidAmount ? 'bidAmount-error' : undefined}
           {...register('bidAmount', { valueAsNumber: true })}
@@ -126,7 +128,7 @@ function CampaignForm({
         hint={
           <>
             (available: <FiDollarSign aria-hidden='true' />
-            {availableBalance})
+            {availableBalance.toFixed(2)})
           </>
         }
         error={errors.campaignFund?.message}
@@ -161,34 +163,22 @@ function CampaignForm({
 
       <FormField
         label='Keywords'
+        htmlFor='keywords'
         error={errors.keywords?.message}
         className={styles.fullWidth}
-        group
       >
         <Controller
           name='keywords'
           control={control}
           render={({ field }) => (
-            <div className={styles.keywords}>
-              {keywordSuggestions.map((keyword) => (
-                <label key={keyword} className={styles.keywordOption}>
-                  <input
-                    type='checkbox'
-                    checked={field.value.includes(keyword)}
-                    onChange={(e) => {
-                      if (e.target.checked) {
-                        field.onChange([...field.value, keyword]);
-                      } else {
-                        field.onChange(
-                          field.value.filter((k) => k !== keyword)
-                        );
-                      }
-                    }}
-                  />
-                  {keyword}
-                </label>
-              ))}
-            </div>
+            <KeywordTypeahead
+              id='keywords'
+              suggestions={keywordSuggestions}
+              value={field.value}
+              onChange={field.onChange}
+              aria-invalid={!!errors.keywords}
+              aria-describedby={errors.keywords ? 'keywords-error' : undefined}
+            />
           )}
         />
       </FormField>
