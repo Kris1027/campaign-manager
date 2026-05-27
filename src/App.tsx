@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from './app.module.css';
 import CampaignList from './components/campaigns/campaign-list';
 import CampaignForm from './components/campaigns/campaign-form';
-import Header from './components/header/header';
+import Header from './components/layout/header';
 import Modal from './components/ui/modal';
 import { useSeller } from './hooks/use-seller';
 import type { Campaign } from './types';

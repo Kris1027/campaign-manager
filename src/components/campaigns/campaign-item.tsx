@@ -17,7 +17,7 @@ function CampaignItem({ campaign, onEdit, onRemove }: CampaignItemProps) {
     campaign;
 
   return (
-    <div className={styles.card}>
+    <article className={styles.card}>
       <h2 className={styles.name}>{name}</h2>
       <div className={styles.fields}>
         <div className={styles.field}>
@@ -43,7 +43,7 @@ function CampaignItem({ campaign, onEdit, onRemove }: CampaignItemProps) {
           <span
             className={`${styles.badge} ${status === 'on' ? styles.badgeOn : styles.badgeOff}`}
           >
-            {status}
+            {status === 'on' ? 'Active' : 'Inactive'}
           </span>
         </div>
         <div className={styles.field}>
@@ -73,7 +73,7 @@ function CampaignItem({ campaign, onEdit, onRemove }: CampaignItemProps) {
         }}
         onCancel={() => setIsConfirmOpen(false)}
       />
-    </div>
+    </article>
   );
 }
 

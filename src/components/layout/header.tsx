@@ -15,7 +15,7 @@ function Header({ emeraldBalance, onNewCampaign }: HeaderProps) {
         <h1 className={styles.heading}>
           <FiShoppingBag aria-hidden='true' /> Campaign Manager
         </h1>
-        <span className={styles.balance}>
+        <span className={styles.balance} aria-live='polite' aria-atomic='true'>
           <FaGem aria-hidden='true' className={styles.emeraldIcon} /> Emerald
           Balance: <FiDollarSign aria-hidden='true' />
           {emeraldBalance}

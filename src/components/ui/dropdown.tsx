@@ -13,6 +13,8 @@ interface DropdownProps {
   onChange: (value: string) => void;
   placeholder?: string;
   id?: string;
+  'aria-invalid'?: boolean;
+  'aria-describedby'?: string;
 }
 
 function Dropdown({
@@ -21,11 +23,14 @@ function Dropdown({
   onChange,
   placeholder = 'Select...',
   id,
+  'aria-invalid': ariaInvalid,
+  'aria-describedby': ariaDescribedBy,
 }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const containerRef = useRef<HTMLDivElement>(null);
   const listId = useId();
+  const getOptionId = (index: number) => `${listId}-option-${index}`;
 
   const selectedOption = options.find((o) => o.value === value);
 
@@ -83,6 +88,13 @@ function Dropdown({
         aria-haspopup='listbox'
         aria-expanded={isOpen}
         aria-controls={listId}
+        aria-activedescendant={
+          isOpen && highlightedIndex >= 0
+            ? getOptionId(highlightedIndex)
+            : undefined
+        }
+        aria-invalid={ariaInvalid}
+        aria-describedby={ariaDescribedBy}
         className={[
           styles.trigger,
           !selectedOption ? styles.placeholder : '',
@@ -104,6 +116,7 @@ function Dropdown({
           {options.map((option, index) => (
             <li
               key={option.value}
+              id={getOptionId(index)}
               role='option'
               aria-selected={option.value === value}
               className={[

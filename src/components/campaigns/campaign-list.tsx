@@ -18,18 +18,20 @@ function CampaignList({
 }: CampaignListProps) {
   if (campaigns.length === 0) {
     return (
-      <div className={styles.empty}>
-        <p className={styles.emptyTitle}>No campaigns yet</p>
-        <p className={styles.emptySubtext}>
-          Create your first campaign to get started
-        </p>
-        <Button onClick={onNewCampaign}>New Campaign</Button>
-      </div>
+      <section aria-label='Campaigns'>
+        <div role='status' className={styles.empty}>
+          <p className={styles.emptyTitle}>No campaigns yet</p>
+          <p className={styles.emptySubtext}>
+            Create your first campaign to get started
+          </p>
+          <Button onClick={onNewCampaign}>New Campaign</Button>
+        </div>
+      </section>
     );
   }
 
   return (
-    <section className={styles.list}>
+    <section aria-label='Campaigns' className={styles.list}>
       {campaigns.map((campaign) => (
         <CampaignItem
           key={campaign.id}

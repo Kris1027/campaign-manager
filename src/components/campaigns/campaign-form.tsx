@@ -59,7 +59,13 @@ function CampaignForm({
         error={errors.name?.message}
         className={styles.fullWidth}
       >
-        <input id='name' type='text' {...register('name')} />
+        <input
+          id='name'
+          type='text'
+          aria-invalid={!!errors.name}
+          aria-describedby={errors.name ? 'name-error' : undefined}
+          {...register('name')}
+        />
       </FormField>
 
       <FormField label='Status' htmlFor='status'>
@@ -91,6 +97,8 @@ function CampaignForm({
               value={field.value}
               onChange={field.onChange}
               placeholder='Select town'
+              aria-invalid={!!errors.town}
+              aria-describedby={errors.town ? 'town-error' : undefined}
             />
           )}
         />
@@ -106,6 +114,8 @@ function CampaignForm({
           type='number'
           step='0.01'
           min='0'
+          aria-invalid={!!errors.bidAmount}
+          aria-describedby={errors.bidAmount ? 'bidAmount-error' : undefined}
           {...register('bidAmount', { valueAsNumber: true })}
         />
       </FormField>
@@ -126,6 +136,10 @@ function CampaignForm({
           type='number'
           step='0.01'
           min='0'
+          aria-invalid={!!errors.campaignFund}
+          aria-describedby={
+            errors.campaignFund ? 'campaignFund-error' : undefined
+          }
           {...register('campaignFund', { valueAsNumber: true })}
         />
       </FormField>
@@ -139,6 +153,8 @@ function CampaignForm({
           id='radius'
           type='number'
           min='1'
+          aria-invalid={!!errors.radius}
+          aria-describedby={errors.radius ? 'radius-error' : undefined}
           {...register('radius', { valueAsNumber: true })}
         />
       </FormField>
@@ -147,6 +163,7 @@ function CampaignForm({
         label='Keywords'
         error={errors.keywords?.message}
         className={styles.fullWidth}
+        group
       >
         <Controller
           name='keywords'
